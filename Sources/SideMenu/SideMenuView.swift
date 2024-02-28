@@ -49,6 +49,8 @@ public struct SideMenuView<Content:View>: View {
                     isMenuOpen.toggle()
                 }
             }
+                        .animation(.linear(duration: 0.24), value: isMenuOpen)
+
          
         }
     }
