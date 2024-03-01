@@ -42,11 +42,12 @@ public struct SideMenuView<Content:View>: View {
            .offset(x: isMenuOpen ? (window()?.bounds.width ?? UIScreen.main.bounds.width) * 0.5 : 0)
            .scaleEffect(isMenuOpen ? 0.8 : 1)
            .rotation3DEffect(.degrees(isMenuOpen && enable3D ? -32 : 0), axis: (x: 0, y: 1, z: 0))
+           // Ensure the animation is applied here, right after the properties that should animate
+           .animation(.linear(duration: 0.5), value: isMenuOpen)
            .ignoresSafeArea(edges: isMenuOpen ? [] : [.all])
            .onTapGesture {
-               withAnimation(.linear(duration: 1.5)) {
-                   isMenuOpen.toggle()
-               }
+               // Just toggle the state here without withAnimation
+               isMenuOpen.toggle()
            }
        }
     }
