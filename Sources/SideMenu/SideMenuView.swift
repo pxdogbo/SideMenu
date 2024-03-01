@@ -44,7 +44,7 @@ public struct SideMenuView<Content:View>: View {
            .rotation3DEffect(.degrees(isMenuOpen && enable3D ? -32 : 0), axis: (x: 0, y: 1, z: 0))
            .ignoresSafeArea(edges: isMenuOpen ? [] : [.all])
            .onTapGesture {
-               withAnimation(.linear(duration: 0.5)) {
+               withAnimation(.linear(duration: 1.5)) {
                    isMenuOpen.toggle()
                }
            }
