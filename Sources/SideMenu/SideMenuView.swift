@@ -45,11 +45,13 @@ public struct SideMenuView<Content:View>: View {
             .animation(.linear(duration: 0.5), value: isMenuOpen)
             .ignoresSafeArea(edges: isMenuOpen ? []:[.all])
             .onTapGesture {
-                if isMenuOpen {
-                    isMenuOpen.toggle()
+                DispatchQueue.main.async {
+                    withAnimation(.linear(duration: 0.5)) {
+                        self.isMenuOpen.toggle()
+                    }
                 }
             }
-         
+
         }
     }
     
