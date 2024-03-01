@@ -27,30 +27,28 @@ public struct SideMenuView<Content:View>: View {
     }
     
    public var body: some View {
-        ZStack {
-            menuBackgroundView
-            ZStack {
-                RoundedRectangle(cornerRadius: isMenuOpen ? 12 : 0)
-                    .foregroundColor(backColor)
-                    .shadow(color: .black.opacity(0.6), radius: isMenuOpen ? 14 : 0)
-  
-                 content
-                .disabled(isMenuOpen)
-                .padding(.top,isMenuOpen ? 0: window()?.safeAreaInsets.top)
-                .padding(.bottom,isMenuOpen ? 0: window()?.safeAreaInsets.bottom)
-            }
-            .offset(x: isMenuOpen ? (window()?.bounds.width ?? UIScreen.main.bounds.width) * 0.5 : 0)
-            .scaleEffect(isMenuOpen ? 0.8 : 1)
-            .rotation3DEffect(.degrees(isMenuOpen && enable3D ? -32:0), axis: (x: 0, y: 1, z: 0))
-            .animation(.linear(duration: 0.5), value: isMenuOpen)
-            .ignoresSafeArea(edges: isMenuOpen ? []:[.all])
-            .onTapGesture {
-                if isMenuOpen {
-                    isMenuOpen.toggle()
-                }
-            }
-         
-        }
+       ZStack {
+           menuBackgroundView
+           ZStack {
+               RoundedRectangle(cornerRadius: isMenuOpen ? 12 : 0)
+                   .foregroundColor(backColor)
+                   .shadow(color: .black.opacity(0.6), radius: isMenuOpen ? 14 : 0)
+
+               content
+                   .disabled(isMenuOpen)
+                   .padding(.top, isMenuOpen ? 0 : window()?.safeAreaInsets.top)
+                   .padding(.bottom, isMenuOpen ? 0 : window()?.safeAreaInsets.bottom)
+           }
+           .offset(x: isMenuOpen ? (window()?.bounds.width ?? UIScreen.main.bounds.width) * 0.5 : 0)
+           .scaleEffect(isMenuOpen ? 0.8 : 1)
+           .rotation3DEffect(.degrees(isMenuOpen && enable3D ? -32 : 0), axis: (x: 0, y: 1, z: 0))
+           .ignoresSafeArea(edges: isMenuOpen ? [] : [.all])
+           .onTapGesture {
+               withAnimation(.linear(duration: 0.5)) {
+                   isMenuOpen.toggle()
+               }
+           }
+       }
     }
     
    public var menuBackgroundView:some View {
